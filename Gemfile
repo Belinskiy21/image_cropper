@@ -10,6 +10,8 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
 gem 'mongoid-grid_fs', github: 'ahoward/mongoid-grid_fs'
 gem "mini_magick"
+gem 'bcrypt', '~> 3.1.7'
+gem 'jwt'
 
 group :development, :test do
   gem 'pry'
@@ -19,6 +21,7 @@ group :development, :test do
   gem 'faker'
   gem 'factory_bot_rails'
   gem 'simplecov'
+  gem 'mongoid-rspec'
 end
 
 group :development do

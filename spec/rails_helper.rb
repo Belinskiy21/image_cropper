@@ -1,6 +1,8 @@
 require 'spec_helper'
+require 'rails/mongoid'
 require 'database_cleaner'
 require 'simplecov'
+require 'mongoid-rspec'
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 
@@ -14,6 +16,8 @@ Shoulda::Matchers.configure do |config|
   end
 end
 
+Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
+
 RSpec.configure do |config|
   ENV["RAILS_ENV"] ||= 'test'
   require File.expand_path("../../config/environment", __FILE__)
@@ -21,16 +25,13 @@ RSpec.configure do |config|
 
   config.include FactoryBot::Syntax::Methods
 
-  config.before(:suite) do
-    DatabaseCleaner.clean_with(:truncation)
-    DatabaseCleaner.strategy = :transaction
-  end
+  config.include Mongoid::Matchers, type: :model
+  config.include Mongoid::Matchers, type: :mongoid_model
 
-  config.around(:each) do |example|
-    DatabaseCleaner.cleaning do
-      example.run
-    end
-  end
+  config.include RequestSpecHelper
+  config.include ControllerSpecHelper
+
+  DatabaseCleaner[:mongo_mapper].strategy = :truncation
 
   config.infer_spec_type_from_file_location!
 
