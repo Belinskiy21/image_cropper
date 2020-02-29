@@ -5,7 +5,7 @@ ruby '2.6.0'
 
 gem 'mongoid'
 gem 'rails', '~> 5.2.3'
-gem 'puma', '~> 3.11'
+gem 'puma', '~> 3.12'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
 gem 'mongoid-grid_fs', github: 'ahoward/mongoid-grid_fs'
